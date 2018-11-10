@@ -1,0 +1,4 @@
+ext {
+    reportsDir = "$project.buildDir/reports"
+    rulesDir = "$project.rootDir/static-analysis/rules"
+}

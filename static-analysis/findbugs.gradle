@@ -1,0 +1,18 @@
+apply from: "$project.rootDir/static-analysis/config.gradle"
+
+apply plugin: 'findbugs'
+
+task findbugs(type: FindBugs) {
+    excludeFilter = file("$rulesDir/findbugs.xml")
+    classes = fileTree("$project.buildDir/intermediates/classes")
+    source = fileTree("$project.rootDir/src/main/")
+    classpath = files()
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        html {
+            destination file("$reportsDir/findbugs.html")
+        }
+    }
+}

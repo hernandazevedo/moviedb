@@ -1,0 +1,80 @@
+apply plugin: 'jacoco'
+
+ext {
+    allTestCoverageFile = "${rootProject.buildDir}/jacoco/allTestCoverage.exec"
+}
+/**
+ * The correct path of the report is $rootProjectDir/app/build/reports/jacoco/index.html
+ * to run this task use: ./gradlew clean jacocoTestReport
+ */
+
+jacoco {
+    toolVersion = '0.8.2'
+}
+
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+}
+
+def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', '**/*$*', 'android/**/*.*', '**/*Function*', '**/*_impl*']
+def projectsFound = subprojects.findAll()
+
+task jacocoMerge(type: JacocoMerge) {
+
+    doFirst {
+        delete fileTree("${rootProject.buildDir}/jacoco/") {
+            include '**/allTestCoverage.exec'
+        }
+    }
+
+    destinationFile = file(allTestCoverageFile)
+
+    def classDirs = files().asFileTree
+    projectsFound.each {
+        def projBuildDir = it.buildDir
+        classDirs += fileTree(dir: projBuildDir, includes: [
+                'jacoco/testDebugUnitTest.exec', 'outputs/code-coverage/connected/*coverage.ec', 'jacoco/test.exec'
+        ])
+    }
+
+    executionData files([classDirs])
+
+    doLast {
+        projectsFound.each {
+            def projBuildDir = it.buildDir
+            copy {
+                from("${project.buildDir}/jacoco/")
+                into("${projBuildDir}/jacoco/")
+            }
+        }
+    }
+}
+
+task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
+    description = 'Generates an aggregate report from all subprojects'
+    def srcDirs = new ArrayList()
+    dependsOn "jacocoMerge"
+    projectsFound.each {
+        def projDir = it.projectDir
+        srcDirs.add("${projDir}/src/main/kotlin")
+    }
+    def classDirs = files().asFileTree
+    projectsFound.each {
+        def projBuildDir = it.buildDir
+        classDirs += fileTree(dir: "$projBuildDir/tmp/kotlin-classes/debug", excludes: fileFilter)
+        classDirs += fileTree(dir: "$projBuildDir/classes/kotlin/main", excludes: fileFilter)
+    }
+
+    sourceDirectories = files([srcDirs])
+    classDirectories = files([classDirs])
+    executionData fileTree(dir: "${rootProject.buildDir}", includes: [
+            'jacoco/allTestCoverage.exec'
+    ])
+
+    reports {
+        xml.enabled true
+        xml.destination file("${rootProject.buildDir}/reports/jacoco/report.xml")
+        html.enabled true
+        html.destination file("${rootProject.buildDir}/reports/jacoco/html")
+    }
+}

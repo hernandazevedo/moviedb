@@ -1,0 +1,17 @@
+apply from: "$project.rootDir/static-analysis/config.gradle"
+
+apply plugin: 'checkstyle'
+
+task checkstyle(type: Checkstyle) {
+    configFile file("$rulesDir/checkstyle.xml")
+    source 'src'
+    include '**/*.java'
+    classpath = files()
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        html {
+            destination file("$reportsDir/checkstyle.html")
+        }
+    }
+}
