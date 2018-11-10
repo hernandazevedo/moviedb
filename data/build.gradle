@@ -17,13 +17,19 @@ apply from: "../coverage.gradle"
 android {
     compileSdkVersion versions.compileSdk
     buildToolsVersion versions.buildTools
-
+    publishNonDefault true
     defaultConfig {
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
         versionCode application.versionCode
         versionName application.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        externalNativeBuild {
+            cmake {
+                cppFlags ""
+                abiFilters 'armeabi-v7a'
+            }
+        }
     }
 
     buildTypes {
@@ -39,15 +45,22 @@ android {
         androidTest.java.srcDirs += 'src/androidTest/kotlin'
     }
 
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
 }
 
 dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':domain')
 
     //TODO add retrofit dependency
 
     implementation baseDependencies.kotlin_std_lib
     implementation baseDependencies.rx_java
+    implementation baseDependencies.timber
 
     testImplementation testDependencies.junit
     testImplementation testDependencies.mockito
