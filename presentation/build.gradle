@@ -27,12 +27,6 @@ android {
         versionName application.versionName
         //TODO Create custom runner for inversion of contrl on tests
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        externalNativeBuild {
-            cmake {
-                cppFlags ""
-                abiFilters 'armeabi-v7a'
-            }
-        }
     }
 
     sourceSets {
@@ -61,11 +55,6 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-    externalNativeBuild {
-        cmake {
-            path "CMakeLists.txt"
         }
     }
 }

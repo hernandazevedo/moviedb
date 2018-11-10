@@ -2,7 +2,7 @@
 #include <string>
 
 extern "C" JNIEXPORT jstring JNICALL
-Java_hernandazevedo_com_moviedb_MainActivity_stringFromJNI(
+Java_com_hernandazevedo_moviedb_data_util_NativeUtils_stringFromJNI(
         JNIEnv *env,
         jobject /* this */) {
     std::string hello = "Hello from C++";
