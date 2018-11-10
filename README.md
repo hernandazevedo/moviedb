@@ -2,3 +2,7 @@
 
 # moviedb
 An app to make it easier to save information of your loved movies
+
+
+# Check the development steps on Trello
+ https://trello.com/b/TNCSKgUT/moviedb
