@@ -1,0 +1,57 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+HashMap<String, String> baseDependencies = rootProject.ext.dependencies
+HashMap<String, String> testDependencies = rootProject.ext.testDependencies
+HashMap<String, String> application = rootProject.ext.application
+HashMap<String, String> versions = rootProject.ext.versions
+
+apply from: '../static-analysis/lint.gradle'
+apply from: '../static-analysis/findbugs.gradle'
+apply from: '../static-analysis/pmd.gradle'
+apply from: '../static-analysis/checkstyle.gradle'
+apply from: '../static-analysis/ktlint.gradle'
+apply from: '../static-analysis/detekt.gradle'
+apply from: "../coverage.gradle"
+
+android {
+    compileSdkVersion versions.compileSdk
+    buildToolsVersion versions.buildTools
+
+    defaultConfig {
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode application.versionCode
+        versionName application.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+        androidTest.java.srcDirs += 'src/androidTest/kotlin'
+    }
+
+}
+
+dependencies {
+    implementation project(':domain')
+
+    //TODO add retrofit dependency
+
+    implementation baseDependencies.kotlin_std_lib
+    implementation baseDependencies.rx_java
+
+    testImplementation testDependencies.junit
+    testImplementation testDependencies.mockito
+    testImplementation testDependencies.mockitoKotlin
+}
+
+check.dependsOn 'checkstyle', 'findbugs', 'pmd', 'ktlint', 'detekt'

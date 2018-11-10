@@ -1,0 +1,10 @@
+apply from: "$project.rootDir/static-analysis/config.gradle"
+
+android {
+    lintOptions {
+        lintConfig file("$rulesDir/lint.xml")
+        htmlOutput file("$reportsDir/lint.html")
+        warningsAsErrors true
+        xmlReport false
+    }
+}

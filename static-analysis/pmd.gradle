@@ -1,0 +1,16 @@
+apply from: "$project.rootDir/static-analysis/config.gradle"
+
+apply plugin: 'pmd'
+
+task pmd(type: Pmd) {
+    ruleSetFiles = files("$rulesDir/pmd.xml")
+    source = fileTree('src/main/java/')
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        html {
+            destination file("$reportsDir/pmd.html")
+        }
+    }
+}

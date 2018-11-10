@@ -1,0 +1,128 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+HashMap<String, String> baseDependencies = rootProject.ext.dependencies
+HashMap<String, String> testDependencies = rootProject.ext.testDependencies
+HashMap<String, String> application = rootProject.ext.application
+HashMap<String, String> versions = rootProject.ext.versions
+
+apply from: '../static-analysis/lint.gradle'
+apply from: '../static-analysis/findbugs.gradle'
+apply from: '../static-analysis/pmd.gradle'
+apply from: '../static-analysis/checkstyle.gradle'
+apply from: '../static-analysis/ktlint.gradle'
+apply from: '../static-analysis/detekt.gradle'
+apply from: "../coverage.gradle"
+
+android {
+    compileSdkVersion versions.compileSdk
+    buildToolsVersion versions.buildTools
+    defaultConfig {
+        applicationId application.applicationId
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode application.versionCode
+        versionName application.versionName
+        //TODO Create custom runner for inversion of contrl on tests
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        externalNativeBuild {
+            cmake {
+                cppFlags ""
+                abiFilters 'armeabi-v7a'
+            }
+        }
+    }
+
+    sourceSets {
+        main { java.srcDirs = ['src/main/java', 'src/main/kotlin'] }
+        test { java.srcDirs = ['src/test/java', 'src/test/kotlin'] }
+        androidTest { java.srcDirs = ['src/androidTest/java', 'src/androidTest/kotlin'] }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    testOptions {
+        animationsDisabled true
+
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+
+    buildTypes {
+        debug {
+            testCoverageEnabled true
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':domain')
+    implementation project(':data')
+
+    implementation baseDependencies.recycler_view
+    implementation baseDependencies.kotlin_std_lib
+
+    implementation baseDependencies.dagger2
+    implementation baseDependencies.dagger2_android_support
+
+    kapt baseDependencies.dagger2_compiler
+    kapt baseDependencies.dagger2_android_processor
+
+    implementation baseDependencies.rx_java
+    implementation baseDependencies.rx_android
+    implementation baseDependencies.rx_binding
+
+    implementation baseDependencies.app_compat
+    implementation baseDependencies.card_view
+    implementation baseDependencies.constraint_layout
+    implementation baseDependencies.support_design
+    implementation baseDependencies.support_annotations
+
+    implementation baseDependencies.arch_lifecycle_extensions
+    kapt baseDependencies.arch_lifecycle_compiler
+
+    testImplementation testDependencies.junit
+    testImplementation testDependencies.mockito
+    testImplementation testDependencies.mockitoKotlin
+    testImplementation testDependencies.core_testing
+
+    testImplementation baseDependencies.dagger2
+    testImplementation(baseDependencies.dagger2_android_support, {
+        exclude group: 'com.android.support'
+    })
+    kaptTest baseDependencies.dagger2_compiler
+    kaptTest baseDependencies.dagger2_android_processor
+
+    androidTestImplementation baseDependencies.dagger2
+    androidTestImplementation baseDependencies.dagger2_android_support
+
+    kaptAndroidTest baseDependencies.dagger2_compiler
+    kaptAndroidTest baseDependencies.dagger2_android_processor
+
+    androidTestImplementation testDependencies.junit
+    androidTestImplementation testDependencies.mockitoKotlin
+    androidTestImplementation testDependencies.kakao
+    androidTestImplementation testDependencies.espresso_intents
+    androidTestImplementation(testDependencies.expresso_core, {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    androidTestImplementation testDependencies.mockito
+}
+
+check.dependsOn 'checkstyle', 'findbugs', 'pmd', 'ktlint', 'detekt'
