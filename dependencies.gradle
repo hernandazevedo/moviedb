@@ -24,6 +24,10 @@ ext {
     rxBindingVersion = '2.0.0'
     timberVersion = '4.7.1'
     secretKeyPluginVersion = '1.0.0'
+    retrofitVersion = "2.3.0"
+    retrofitRxAdapterVersion = "2.2.0"
+    okHttpInterceptorVersion = "3.8.0"
+    gsonVersion = "2.7"
 
     dependencies = [
             dagger2                  : "com.google.dagger:dagger:$daggerVersion",
@@ -47,6 +51,11 @@ ext {
             recycler_view            : "com.android.support:recyclerview-v7:$supportVersion",
             parceler_api             : "org.parceler:parceler-api:$parcelerVersion",
             parceler                 : "org.parceler:parceler:$parcelerVersion",
+            retrofit                : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            retrofitRxAdapter       : "com.squareup.retrofit2:adapter-rxjava2:${retrofitRxAdapterVersion}",
+            retrofitScalarsConverter: "com.squareup.retrofit2:converter-scalars:${retrofitVersion}",
+            okHttpInterceptor       : "com.squareup.okhttp3:logging-interceptor:${okHttpInterceptorVersion}",
+            gson: "com.google.code.gson:gson:${gsonVersion}",
 
             arch_lifecycle_extensions: "android.arch.lifecycle:extensions:$lifecycle",
             arch_lifecycle_compiler  : "android.arch.lifecycle:compiler:$lifecycle",

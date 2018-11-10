@@ -57,11 +57,14 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':domain')
 
-    //TODO add retrofit dependency
-
     implementation baseDependencies.kotlin_std_lib
     implementation baseDependencies.rx_java
     implementation baseDependencies.timber
+    api baseDependencies.retrofit
+    implementation baseDependencies.retrofitRxAdapter
+    implementation baseDependencies.retrofitScalarsConverter
+    implementation baseDependencies.okHttpInterceptor
+    implementation baseDependencies.gson
 
     testImplementation testDependencies.junit
     testImplementation testDependencies.mockito

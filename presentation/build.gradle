@@ -66,6 +66,13 @@ dependencies {
 
     implementation baseDependencies.recycler_view
     implementation baseDependencies.kotlin_std_lib
+    implementation baseDependencies.timber
+
+    api baseDependencies.retrofit
+    implementation baseDependencies.retrofitRxAdapter
+    implementation baseDependencies.retrofitScalarsConverter
+    implementation baseDependencies.okHttpInterceptor
+    implementation baseDependencies.gson
 
     implementation baseDependencies.dagger2
     implementation baseDependencies.dagger2_android_support

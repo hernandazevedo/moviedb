@@ -1,6 +1,6 @@
 package com.hernandazevedo.moviedb.data.util
 
-class NativeUtils {
+class NativeUtils : RemoteNativeUtils {
     /**
      * A native method that is implemented by the 'native-lib' native library,
      * which is packaged with this application.
@@ -15,4 +15,6 @@ class NativeUtils {
             System.loadLibrary("native-lib")
         }
     }
+
+    override fun getApiKey(): String = getOmdbApiKey()
 }
