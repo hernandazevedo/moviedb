@@ -29,6 +29,11 @@ fun View.gone() {
     this.visibility = View.GONE
 }
 
+/**
+ * @param factory a lambda expression that returns the viewModel and teaches the ViewModelFactory of google how to
+ * create the viewModel.
+ * Returns a view model managed by architecture component, and capable of being used on a configuration change event.
+ */
 inline fun <reified T : ViewModel> LifecycleOwner.getFactoryViewModel(crossinline factory: () -> T): T {
     val vmFactory = object : ViewModelProvider.Factory {
         override fun <U : ViewModel> create(modelClass: Class<U>): U = factory() as U

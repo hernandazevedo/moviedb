@@ -12,6 +12,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [(AndroidInjectionModule::class),
     (AndroidSupportInjectionModule::class),
+    (ApiModule::class),
     (ApplicationModule::class),
     (ActivityBuilder::class)])
 abstract class ApplicationComponent : AndroidInjector<MovieDbApplication> {

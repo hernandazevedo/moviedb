@@ -1,0 +1,6 @@
+#ifndef NATIVE_LIB_CONFIG_H
+#define NATIVE_LIB_CONFIG_H
+
+static const char OMBD_API_KEY[9] = "OMBD_API_KEY_REPLACE";
+
+#endif //NATIVE_LIB_CONFIG_H
