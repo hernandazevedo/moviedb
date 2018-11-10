@@ -6,6 +6,7 @@ class NativeUtils {
      * which is packaged with this application.
      */
     external fun stringFromJNI(): String
+    external fun getOmdbApiKey(): String
 
     companion object {
 

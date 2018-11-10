@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'gradle-secretkey'
 
 HashMap<String, String> baseDependencies = rootProject.ext.dependencies
 HashMap<String, String> testDependencies = rootProject.ext.testDependencies
@@ -67,4 +68,16 @@ dependencies {
     testImplementation testDependencies.mockitoKotlin
 }
 
+secretkey {
+    def localProp = new Properties()
+    def fileName = 'local.properties'
+    if (project.rootProject.file(fileName).exists()) {
+        localProp.load(new FileInputStream(rootProject.file(fileName)))
+    }
+    def omdbApiKey = System.env.OMBD_API_KEY != null ? System.env.OMBD_API_KEY : localProp["omdbApiKey"] ?: ""
+    templateFile = "${project.projectDir}/src/main/cpp/include/native-lib-config.h.template"
+    keyMap = [OMBD_API_KEY_REPLACE: omdbApiKey]
+}
+
+project.tasks.preBuild.dependsOn project.tasks.processKeys
 check.dependsOn 'checkstyle', 'findbugs', 'pmd', 'ktlint', 'detekt'

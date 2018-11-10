@@ -248,4 +248,7 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 
+# Ignoring the secret keys file, should not be placed on remote repository
+/data/src/main/cpp/include/native-lib-config.h
+
 # End of https://www.gitigit adgnore.io/api/java,linux,windows,android,intellij,androidstudio

@@ -23,6 +23,7 @@ ext {
     lifecycle = '1.1.0'
     rxBindingVersion = '2.0.0'
     timberVersion = '4.7.1'
+    secretKeyPluginVersion = '1.0.0'
 
     dependencies = [
             dagger2                  : "com.google.dagger:dagger:$daggerVersion",
