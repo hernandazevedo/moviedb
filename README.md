@@ -16,8 +16,8 @@ Check the plugin here: [gradle-secretkey-plugin](https://github.com/hernandazeve
 
 ## Code Walkthrough
 
-The code is organized using a Clean Architecture with MVVM architecture for the presentatio layer. The implementation was heavily
-in the articles and projects of Fernando Cejas:
+The code is organized using a Clean Architecture with MVVM architecture for the presentatio layer. The implementation was heavily based
+on the articles and projects of Fernando Cejas:
  * Article: https://fernandocejas.com/2014/09/03/architecting-android-the-clean-way/
  * Project: https://github.com/android10/Android-CleanArchitecture
  
@@ -25,10 +25,10 @@ in the articles and projects of Fernando Cejas:
 
 A brief description:
 
-  * `domain`: Business rules and interfaces on how to interact with services and repositories.
-  * `presentation`: Logic that connects the business rules with the UI. Manipulation of data for
-  view.
-  * `data`: Implementations of services and repositories.
+ * domain: Business rules and interfaces on how to interact with services and repositories.
+ * presentation: Logic that connects the business rules with the UI. Manipulation of data for
+ view.
+ * data: Implementations of services and repositories.
   
   
   ## Decisions
