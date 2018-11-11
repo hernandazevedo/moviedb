@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
@@ -19,7 +18,6 @@ import com.hernandazevedo.moviedb.R
 
 class MovieAdapter(private var movies: MutableList<Movie>? = null,
                    private val context: Context,
-                   private val favClick: (favored: Boolean, movie: Movie) -> Unit,
                    private val itemClick: (movie: Movie,
                                            options: ActivityOptionsCompat
                    ) -> Unit?) :
@@ -58,7 +56,6 @@ class MovieAdapter(private var movies: MutableList<Movie>? = null,
 
         val title by lazy { view.findViewById<TextView>(R.id.movieTitle) }
         val year by lazy { view.findViewById<TextView>(R.id.movieReleaseYear) }
-        val favAction by lazy { view.findViewById<CheckBox>(R.id.favoriteButton) }
         val image by lazy { view.findViewById<ImageView>(R.id.movieImageView) }
         val favoriteContainer by lazy { view.findViewById<View>(R.id.favoriteContainer) }
         val voteContainer by lazy { view.findViewById<View>(R.id.voteContainer) }
@@ -71,12 +68,6 @@ class MovieAdapter(private var movies: MutableList<Movie>? = null,
                 favoriteContainer.setBackgroundColor(context.getColor(R.color.black))
             } else {
                 favoriteContainer.setBackgroundColor(context.getColor(R.color.yellow))
-            }
-
-            favAction.setOnClickListener { v ->
-                val checked = (v as CheckBox).isChecked
-                movie.imdbID.let { favItems.put(it, checked) }
-                favClick(checked, movie)
             }
 
             itemView.setOnClickListener {
@@ -95,7 +86,6 @@ class MovieAdapter(private var movies: MutableList<Movie>? = null,
 
             title.text = movie.title
             year.text = movie.year
-            favAction.isChecked = favItems[movie.imdbID]!!
         }
 
         private fun animationTransitionSetup(): ActivityOptionsCompat {
@@ -105,12 +95,10 @@ class MovieAdapter(private var movies: MutableList<Movie>? = null,
                 context.getString(R.string.year_transition))
             val p3 = Pair(voteContainer as View,
                 context.getString(R.string.vote_transition))
-            val p4 = Pair(favAction as View,
-                context.getString(R.string.favorite_transition))
-            val p5 = Pair(favoriteContainer as View,
+            val p4 = Pair(favoriteContainer as View,
                 context.getString(R.string.fav_container_transition))
             val options = ActivityOptionsCompat
-                .makeSceneTransitionAnimation(context as Activity, p1, p2, p3, p4, p5)
+                .makeSceneTransitionAnimation(context as Activity, p1, p2, p3, p4)
             return options
         }
     }

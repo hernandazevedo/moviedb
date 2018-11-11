@@ -35,6 +35,7 @@ class DetailsActivity : BaseActivity() {
         setContentView(R.layout.activity_details)
         subscribeToSearchMovie()
         populateInfo()
+        setupFavAction()
         detailsViewModel.getMovieDetails(movie.imdbID)
     }
 
@@ -60,6 +61,7 @@ class DetailsActivity : BaseActivity() {
             movieVoteAverage.text = it.imdbRating
             movieGenres.text = it.genre
             movieOverView.text = it.plot
+            favoriteButton.isChecked = it.favored
         }
     }
 

@@ -9,4 +9,5 @@ data class MovieDetail(val imdbID: String,
                        val posterUrl: String,
                        val plot: String,
                        val imdbRating: String,
-                       val genre: String) : Serializable
+                       val genre: String,
+                       var favored: Boolean = false) : Serializable

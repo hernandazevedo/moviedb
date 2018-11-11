@@ -60,20 +60,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/movieTitle"
                 tools:text="2017" />
-
-        <CheckBox
-                android:id="@+id/favoriteButton"
-                android:layout_width="50dp"
-                android:layout_height="0dp"
-                android:button="@drawable/selector_favorite_check_box"
-                android:text=""
-                android:textAlignment="center"
-                android:textSize="0sp"
-                android:transitionName="@string/favorite_transition"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/movieTitle"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout

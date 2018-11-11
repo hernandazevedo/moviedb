@@ -27,14 +27,4 @@ open class MainViewModel(val searchMovieUseCase: BaseUseCase<SearchMovieRequest,
                     responseSearchMovie.value = Resource.error(it)
                 }))
     }
-
-    fun favoriteAction(checked: Boolean, movie: Movie) {
-        if (checked) {
-            //TODO save the movie to db
-            Logger.d("Saving movie")
-        } else {
-            //TODO remove the movie from db
-            Logger.d("Removing movie")
-        }
-    }
 }

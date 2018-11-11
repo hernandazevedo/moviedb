@@ -117,6 +117,8 @@ dependencies {
     kaptAndroidTest baseDependencies.dagger2_compiler
     kaptAndroidTest baseDependencies.dagger2_android_processor
 
+    implementation baseDependencies.room
+
     androidTestImplementation testDependencies.junit
     androidTestImplementation testDependencies.mockitoKotlin
     androidTestImplementation testDependencies.kakao

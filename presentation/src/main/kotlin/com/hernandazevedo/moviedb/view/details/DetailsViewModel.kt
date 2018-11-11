@@ -5,14 +5,21 @@ import com.hernandazevedo.moviedb.Movie
 import com.hernandazevedo.moviedb.MovieDetail
 import com.hernandazevedo.moviedb.data.Logger
 import com.hernandazevedo.moviedb.domain.usecase.base.BaseUseCase
+import com.hernandazevedo.moviedb.domain.usecase.request.DeleteMovieFromLocalDatabaseRequest
 import com.hernandazevedo.moviedb.domain.usecase.request.GetMovieDetailsRequest
+import com.hernandazevedo.moviedb.domain.usecase.request.SaveMovieToLocalDatabaseRequest
 import com.hernandazevedo.moviedb.util.UseCaseHandler
 import com.hernandazevedo.moviedb.view.base.BaseViewModel
 import com.hernandazevedo.moviedb.view.base.Resource
 
-class DetailsViewModel(val getMovieDetailsUseCase: BaseUseCase<GetMovieDetailsRequest, MovieDetail>) : BaseViewModel() {
+class DetailsViewModel(
+    val getMovieDetailsUseCase: BaseUseCase<GetMovieDetailsRequest, MovieDetail>,
+    val saveMovieToLocalDatabaseUseCase: BaseUseCase<SaveMovieToLocalDatabaseRequest, Long>,
+    val deleteMovieFromLocalDatabaseUseCase: BaseUseCase<DeleteMovieFromLocalDatabaseRequest, Long>
+) : BaseViewModel() {
 
     val responseGetMovieDetails: MutableLiveData<Resource<MovieDetail>> = MutableLiveData()
+    val rsponseFavoriteAction: MutableLiveData<Resource<Any>> = MutableLiveData()
 
     fun getMovieDetails(imdbID: String) {
         Logger.d("Starting getMovieDetails - $imdbID")
@@ -30,12 +37,24 @@ class DetailsViewModel(val getMovieDetailsUseCase: BaseUseCase<GetMovieDetailsRe
     }
 
     fun favoriteAction(checked: Boolean, movie: Movie) {
-        if (checked) {
-            //TODO save the movie to db
-            Logger.d("Saving movie")
+        val useCaseExecute = if (checked) {
+            Logger.d("Saving movie imdbID ${movie.imdbID}")
+            val requestValues = SaveMovieToLocalDatabaseRequest(movie)
+            UseCaseHandler.execute(saveMovieToLocalDatabaseUseCase, requestValues)
         } else {
-            //TODO remove the movie from db
-            Logger.d("Removing movie")
+            Logger.d("Removing movie imdbID ${movie.imdbID}")
+            val requestValues = DeleteMovieFromLocalDatabaseRequest(movie.imdbID)
+            UseCaseHandler.execute(deleteMovieFromLocalDatabaseUseCase, requestValues)
         }
+
+        compositeDisposable.add(
+            useCaseExecute
+                .subscribe({
+                    Logger.d("Success favoriteAction $checked")
+                    responseGetMovieDetails.value = Resource.success()
+                }, {
+                    Logger.d("Error favoriteAction $checked")
+                    responseGetMovieDetails.value = Resource.error(it)
+                }))
     }
 }

@@ -6,7 +6,7 @@ class Resource<out T>(val status: Status,
     companion object {
         const val HASHCODE_MULTIPLIER = 31
         const val ZERO = 0
-        fun <T> success(data: T?): Resource<T> {
+        fun <T> success(data: T? = null): Resource<T> {
             return Resource(Status.SUCCESS, data, null)
         }
 
