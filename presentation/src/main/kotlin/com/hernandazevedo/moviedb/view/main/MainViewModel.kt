@@ -20,11 +20,21 @@ open class MainViewModel(val searchMovieUseCase: BaseUseCase<SearchMovieRequest,
         compositeDisposable.add(
             useCaseExecute
                 .subscribe({
-                    Logger.d("admin password correct")
+                    Logger.d("Success searching movies for title $title")
                     responseSearchMovie.value = Resource.success(it)
                 }, {
-                    Logger.d("admin password wrong")
+                    Logger.d("Error searching movies for title $title")
                     responseSearchMovie.value = Resource.error(it)
                 }))
+    }
+
+    fun favoriteAction(checked: Boolean, movie: Movie) {
+        if (checked) {
+            //TODO save the movie to db
+            Logger.d("Saving movie")
+        } else {
+            //TODO remove the movie from db
+            Logger.d("Removing movie")
+        }
     }
 }

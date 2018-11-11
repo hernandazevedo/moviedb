@@ -7,7 +7,7 @@ ext {
 
     versions = [
             buildTools: "28.0.3",
-            minSdk    : 21,
+            minSdk    : 23,
             targetSdk : 28,
             compileSdk: 28,
     ]
@@ -29,6 +29,7 @@ ext {
     okHttpInterceptorVersion = "3.8.0"
     gsonVersion = "2.7"
     atslRunnerVersion = '1.0.1'
+    glideVersion = '4.0.0'
 
     dependencies = [
             dagger2                  : "com.google.dagger:dagger:$daggerVersion",
@@ -58,6 +59,7 @@ ext {
             okHttpInterceptor        : "com.squareup.okhttp3:logging-interceptor:${okHttpInterceptorVersion}",
             gson: "com.google.code.gson:gson:${gsonVersion}",
 
+            glide                    : "com.github.bumptech.glide:glide:$glideVersion",
             arch_lifecycle_extensions: "android.arch.lifecycle:extensions:$lifecycle",
             arch_lifecycle_compiler  : "android.arch.lifecycle:compiler:$lifecycle",
             timber                   : "com.jakewharton.timber:timber:$timberVersion",

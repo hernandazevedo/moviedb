@@ -57,6 +57,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    //FIXME remove this later
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
@@ -89,6 +94,7 @@ dependencies {
     implementation baseDependencies.constraint_layout
     implementation baseDependencies.support_design
     implementation baseDependencies.support_annotations
+    implementation baseDependencies.glide
 
     implementation baseDependencies.arch_lifecycle_extensions
     kapt baseDependencies.arch_lifecycle_compiler
