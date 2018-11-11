@@ -1,4 +1,4 @@
-package com.hernandazevedo.moviedb.data.remote
+package com.hernandazevedo.moviedb.data.api.remote
 
 import com.google.gson.annotations.SerializedName
 

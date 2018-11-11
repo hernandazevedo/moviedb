@@ -14,5 +14,7 @@
     <string name="favorite_transition">favoriteTransitionName</string>
     <string name="year_transition">year_transition_name</string>
     <string name="fav_container_transition">favoriteContainerTransitionName</string>
+    <string name="vote_transition">voteTransitionName</string>
     <string name="share_transition">shareTransitionName</string>
+    <string name="genres">Genres:</string>
 </resources>

@@ -12,6 +12,7 @@ import com.hernandazevedo.moviedb.Movie
 import com.hernandazevedo.moviedb.R
 import com.hernandazevedo.moviedb.data.Logger
 import com.hernandazevedo.moviedb.getFactoryViewModel
+import com.hernandazevedo.moviedb.view.Navigator
 import com.hernandazevedo.moviedb.view.adapter.MovieAdapter
 import com.hernandazevedo.moviedb.view.base.BaseActivity
 import com.hernandazevedo.moviedb.view.base.Resource
@@ -25,14 +26,15 @@ class MainActivity : BaseActivity() , NavigationView.OnNavigationItemSelectedLis
     @Inject
     lateinit var mainViewModel: MainViewModel
 
+    @Inject lateinit var navigator: Navigator
+
     val layoutManager = LinearLayoutManager(this)
 
     val movieAdapter by lazy {
         MovieAdapter(context = this@MainActivity,
             favClick = { checked, movie -> mainViewModel.favoriteAction(checked, movie) },
             itemClick = { movie, options ->
-                //TODO send to DetailsActivity
-                showMessage("Item clicked! Going to details")
+                navigator.navigateToDetails(this@MainActivity, options, movie)
             })
     }
 

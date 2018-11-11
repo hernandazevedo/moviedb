@@ -2,7 +2,7 @@ package com.hernandazevedo.moviedb.data.mapper
 
 import com.hernandazevedo.moviedb.Movie
 import com.hernandazevedo.moviedb.data.base.BaseMapper
-import com.hernandazevedo.moviedb.data.remote.RemoteMovie
+import com.hernandazevedo.moviedb.data.api.remote.RemoteMovie
 
 object MovieMapper : BaseMapper<RemoteMovie, Movie>() {
     override fun transformFrom(source: Movie): RemoteMovie {

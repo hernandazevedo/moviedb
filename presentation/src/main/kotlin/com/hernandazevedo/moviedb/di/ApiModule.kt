@@ -2,7 +2,7 @@ package com.hernandazevedo.moviedb.di
 
 import com.hernandazevedo.moviedb.data.api.interfaces.ApiRepository
 import com.hernandazevedo.moviedb.data.api.interfaces.ApiRepositoryImpl
-import com.hernandazevedo.moviedb.data.rest.ApiContract
+import com.hernandazevedo.moviedb.data.api.rest.ApiContract
 import com.hernandazevedo.moviedb.data.util.NativeUtils
 import com.hernandazevedo.moviedb.data.util.RemoteNativeUtils
 import dagger.Module
