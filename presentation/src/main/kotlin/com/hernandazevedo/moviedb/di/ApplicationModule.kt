@@ -7,6 +7,8 @@ import com.hernandazevedo.moviedb.data.datasource.MovieDataSource
 import com.hernandazevedo.moviedb.data.datasource.MovieDataSourceImpl
 import com.hernandazevedo.moviedb.data.repository.MovieRepositoryImpl
 import com.hernandazevedo.moviedb.domain.repository.MovieRepository
+import com.hernandazevedo.moviedb.view.Navigator
+import com.hernandazevedo.moviedb.view.NavigatorImpl
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -28,5 +30,11 @@ class ApplicationModule {
     @Singleton
     fun provideMovieDataSource(apiRepository: ApiRepository): MovieDataSource {
         return MovieDataSourceImpl(apiRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideNavigator(): Navigator {
+        return NavigatorImpl()
     }
 }

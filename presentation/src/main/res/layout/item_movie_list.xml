@@ -76,4 +76,55 @@
                 app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
+    <android.support.constraint.ConstraintLayout
+            android:id="@+id/voteContainer"
+            android:layout_width="0dp"
+            android:layout_height="57dp"
+            android:background="@color/blackTransparency"
+            android:transitionName="@string/vote_transition"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+        <ImageView
+                android:id="@+id/adultImageStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/voteAverage"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_clapperboard" />
+
+        <TextView
+                android:id="@+id/voteAverage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:textColor="@android:color/white"
+                android:textSize="32sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/adultImageStatus"
+                app:layout_constraintRight_toLeftOf="@+id/voteAverageStar"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.526"
+                tools:ignore="MissingPrefix"
+                tools:text="7.6" />
+
+        <ImageView
+                android:id="@+id/voteAverageStar"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:tint="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/voteAverage"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_star" />
+
+    </android.support.constraint.ConstraintLayout>
+
 </android.support.constraint.ConstraintLayout>

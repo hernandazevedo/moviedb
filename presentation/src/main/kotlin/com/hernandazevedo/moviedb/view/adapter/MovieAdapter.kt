@@ -61,6 +61,7 @@ class MovieAdapter(private var movies: MutableList<Movie>? = null,
         val favAction by lazy { view.findViewById<CheckBox>(R.id.favoriteButton) }
         val image by lazy { view.findViewById<ImageView>(R.id.movieImageView) }
         val favoriteContainer by lazy { view.findViewById<View>(R.id.favoriteContainer) }
+        val voteContainer by lazy { view.findViewById<View>(R.id.voteContainer) }
 
         fun bind(movie: Movie) {
             populateMovieData(movie)
@@ -102,12 +103,14 @@ class MovieAdapter(private var movies: MutableList<Movie>? = null,
                 context.getString(R.string.title_transition))
             val p2 = Pair(year as View,
                 context.getString(R.string.year_transition))
-            val p3 = Pair(favAction as View,
+            val p3 = Pair(voteContainer as View,
+                context.getString(R.string.vote_transition))
+            val p4 = Pair(favAction as View,
                 context.getString(R.string.favorite_transition))
-            val p4 = Pair(favoriteContainer as View,
+            val p5 = Pair(favoriteContainer as View,
                 context.getString(R.string.fav_container_transition))
             val options = ActivityOptionsCompat
-                .makeSceneTransitionAnimation(context as Activity, p1, p2, p3, p4)
+                .makeSceneTransitionAnimation(context as Activity, p1, p2, p3, p4, p5)
             return options
         }
     }

@@ -3,8 +3,9 @@ package com.hernandazevedo.moviedb.data.api.interfaces
 import br.com.stone.pos.android.service.container.domain.exceptions.NetworkHostException
 import br.com.stone.pos.android.service.container.domain.exceptions.NetworkTimeoutException
 import com.hernandazevedo.moviedb.data.mapper.MovieJsonMapper
-import com.hernandazevedo.moviedb.data.remote.RemoteMovieSearch
-import com.hernandazevedo.moviedb.data.rest.ApiContract
+import com.hernandazevedo.moviedb.data.api.remote.RemoteMovieDetail
+import com.hernandazevedo.moviedb.data.api.remote.RemoteMovieSearch
+import com.hernandazevedo.moviedb.data.api.rest.ApiContract
 import com.hernandazevedo.moviedb.data.util.RemoteNativeUtils
 import com.hernandazevedo.moviedb.exeptions.NetworkResponseException
 import io.reactivex.Observable
@@ -20,6 +21,14 @@ class ApiRepositoryImpl(var apiContract: ApiContract,
             ApiContract.BASE_OMDB_API_URL,
             title, remoteNativeUtils.getApiKey())).flatMapObservable {
             Observable.just(MovieJsonMapper().transformSearch(it))
+        }
+    }
+
+    override fun findMovieByImdbId(imdbId: String): Observable<RemoteMovieDetail> {
+        return makeRequest(apiContract.getMovieById(
+            ApiContract.BASE_OMDB_API_URL,
+            imdbId, remoteNativeUtils.getApiKey())).flatMapObservable {
+            Observable.just(MovieJsonMapper().transformToRemoteMovieDetail(it))
         }
     }
 
