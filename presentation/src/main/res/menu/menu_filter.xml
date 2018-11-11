@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+            android:id="@+id/action_filter_my_favorites"
+            android:icon="@drawable/ic_heart"
+            android:orderInCategory="0"
+            android:title="@string/filter_by_favorite"
+            app:showAsAction="always" />
+    <item
+            android:id="@+id/action_filter"
+            android:icon="@drawable/ic_filter_list_yellow_24dp"
+            android:orderInCategory="1"
+            android:title="@string/filter_by"
+            app:showAsAction="always" />
+
+</menu>

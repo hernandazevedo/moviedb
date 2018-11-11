@@ -14,4 +14,5 @@ interface MovieDataSource {
     fun saveMovieToLocalDatabase(movie: Movie): Observable<Long>
     fun deleteMovieFromLocalDatabase(imdbID: String): Observable<Long>
     fun findMovieOnLocalDatabaseByImdbId(imdbID: String): MovieEntity
+    fun findSavedMoviesOnLocalDatabase(): Observable<List<MovieEntity>>
 }

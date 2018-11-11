@@ -1,6 +1,7 @@
 package com.hernandazevedo.moviedb.view.details
 
 import android.arch.lifecycle.Observer
+import android.content.Intent
 import android.os.Bundle
 import android.widget.CheckBox
 import com.bumptech.glide.Glide
@@ -34,6 +35,7 @@ class DetailsActivity : BaseActivity() {
         detailsViewModel = getFactoryViewModel { detailsViewModel }
         setContentView(R.layout.activity_details)
         subscribeToSearchMovie()
+        shareAction.setOnClickListener { setupShareAction() }
         populateInfo()
         setupFavAction()
         detailsViewModel.getMovieDetails(movie.imdbID)
@@ -86,6 +88,18 @@ class DetailsActivity : BaseActivity() {
             var strGenres = "Genre"
             movieGenres.text = strGenres
         }
+    }
+
+    private fun setupShareAction() {
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.type = "text/plain"
+        intent.putExtra(
+            Intent.EXTRA_TEXT, "Moviedb - Recommendation\n\n" +
+                    "Title: ${movie.title}\n" +
+                    "Release Date: ${movie.year}\n" +
+                    "${movie.posterUrl}")
+
+        startActivity(Intent.createChooser(intent, "Movie Recommendation"))
     }
 
     private fun setupFavAction() {

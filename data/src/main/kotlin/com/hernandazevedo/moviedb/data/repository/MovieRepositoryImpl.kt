@@ -4,6 +4,7 @@ import com.hernandazevedo.moviedb.Movie
 import com.hernandazevedo.moviedb.MovieDetail
 import com.hernandazevedo.moviedb.data.datasource.MovieDataSource
 import com.hernandazevedo.moviedb.data.mapper.MovieDetailMapper
+import com.hernandazevedo.moviedb.data.mapper.MovieEntityMapper
 import com.hernandazevedo.moviedb.data.mapper.MovieMapper
 import com.hernandazevedo.moviedb.domain.repository.MovieRepository
 import io.reactivex.Observable
@@ -31,5 +32,9 @@ class MovieRepositoryImpl(var movieDataSource: MovieDataSource) : MovieRepositor
 
     override fun deleteMovieFromLocalDatabase(imdbID: String): Observable<Long> {
         return movieDataSource.deleteMovieFromLocalDatabase(imdbID)
+    }
+
+    override fun findSavedMoviesOnLocalDatabase(): Observable<List<Movie>> {
+        return movieDataSource.findSavedMoviesOnLocalDatabase().map { MovieEntityMapper.transformFromList(it) }
     }
 }
