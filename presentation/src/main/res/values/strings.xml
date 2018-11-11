@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Moviedb</string>
+    <string name="filter_text">The movie list will be updated by your search</string>
+    <string name="filter_by">Filter by title</string>
+    <string name="search_movie_title">Search Movie</string>
+    <string name="toolbar_title">Moviedb: Favorite you movies</string>
+    <string name="no_movies">Drag left to search your movie</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="image_transition">imageTransitionName</string>
+    <string name="spacer_transition">spacerTransitionName</string>
+    <string name="title_transition">titleTransitionName</string>
+    <string name="favorite_transition">favoriteTransitionName</string>
+    <string name="year_transition">year_transition_name</string>
+    <string name="fav_container_transition">favoriteContainerTransitionName</string>
+    <string name="share_transition">shareTransitionName</string>
 </resources>

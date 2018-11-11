@@ -21,7 +21,9 @@ data class MovieEntity (@PrimaryKey(autoGenerate = true)
                         @ColumnInfo(name = "type")
                         var type: String = Constants.NO_VALUE_STRING,
                         @ColumnInfo(name = "posterUrl")
-                        var posterUrl: String = Constants.NO_VALUE_STRING
+                        var posterUrl: String = Constants.NO_VALUE_STRING,
+                        @ColumnInfo(name = "favored")
+                        var favored: Boolean = false
                         ) {
     companion object {
         const val TABLE_NAME = "Movie"
