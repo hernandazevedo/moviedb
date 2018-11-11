@@ -33,4 +33,7 @@ class MovieDataSourceImpl(var apiRepository: ApiRepository,
             return@fromCallable 1L // One row affected
         }
     }
+    override fun findSavedMoviesOnLocalDatabase(): Observable<List<MovieEntity>> {
+        return movieEntityDao.getAllMovies().toObservable()
+    }
 }

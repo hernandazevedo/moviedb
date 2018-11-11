@@ -7,6 +7,7 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.Menu
 import android.view.MenuItem
 import com.hernandazevedo.moviedb.Movie
 import com.hernandazevedo.moviedb.R
@@ -48,12 +49,22 @@ class MainActivity : BaseActivity() , NavigationView.OnNavigationItemSelectedLis
         subscribeToSearchMovie()
     }
 
-    private fun setupButtons() {
-        searchMovieButton.setOnClickListener {
-            mainViewModel.searchMovie(movieTitleEditText.text.toString())
-            drawerLayout.closeDrawer(GravityCompat.END)
-            hideKeyboard()
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_filter, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.action_filter -> {
+            drawerLayout.openDrawer(GravityCompat.END)
+            true
         }
+        R.id.action_filter_my_favorites -> {
+            showMessage(getText(R.string.searching_favorites).toString())
+            mainViewModel.fetchMyfavorites()
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -101,5 +112,13 @@ class MainActivity : BaseActivity() , NavigationView.OnNavigationItemSelectedLis
         toolbar.setTitleTextColor(ContextCompat.getColor(this, android.R.color.white))
         supportActionBar!!.setDisplayHomeAsUpEnabled(false)
         supportActionBar?.title = ""
+    }
+
+    private fun setupButtons() {
+        searchMovieButton.setOnClickListener {
+            mainViewModel.searchMovie(movieTitleEditText.text.toString())
+            drawerLayout.closeDrawer(GravityCompat.END)
+            hideKeyboard()
+        }
     }
 }
