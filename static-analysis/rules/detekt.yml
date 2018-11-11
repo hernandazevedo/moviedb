@@ -104,7 +104,6 @@ exceptions:
     exceptions:
       - ArrayIndexOutOfBoundsException
       - Error
-      - Exception
       - IllegalMonitorStateException
       - IndexOutOfBoundsException
       - InterruptedException

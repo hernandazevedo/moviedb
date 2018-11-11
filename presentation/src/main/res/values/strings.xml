@@ -3,7 +3,7 @@
     <string name="filter_text">The movie list will be updated by your search</string>
     <string name="filter_by">Filter by title</string>
     <string name="search_movie_title">Search Movie</string>
-    <string name="toolbar_title">Moviedb: Favorite you movies</string>
+    <string name="toolbar_title">Moviedb: Favorite your movies</string>
     <string name="no_movies">Drag left to search your movie</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>

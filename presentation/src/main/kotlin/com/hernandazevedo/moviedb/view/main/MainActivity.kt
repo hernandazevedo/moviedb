@@ -32,7 +32,6 @@ class MainActivity : BaseActivity() , NavigationView.OnNavigationItemSelectedLis
 
     val movieAdapter by lazy {
         MovieAdapter(context = this@MainActivity,
-            favClick = { checked, movie -> mainViewModel.favoriteAction(checked, movie) },
             itemClick = { movie, options ->
                 navigator.navigateToDetails(this@MainActivity, options, movie)
             })

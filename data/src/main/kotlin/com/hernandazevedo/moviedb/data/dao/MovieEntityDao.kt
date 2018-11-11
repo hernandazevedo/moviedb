@@ -13,6 +13,12 @@ interface MovieEntityDao {
     @Query("SELECT * FROM ${MovieEntity.TABLE_NAME} WHERE Id = :movieId")
     fun findMovieById(movieId: Long): Single<MovieEntity>
 
+    @Query("SELECT * FROM ${MovieEntity.TABLE_NAME} WHERE imdbID = :imdbID")
+    fun findMovieByImdbID(imdbID: String): MovieEntity
+
     @Query("SELECT * from ${MovieEntity.TABLE_NAME}")
     fun getAllMovies(): Single<List<MovieEntity>>
+
+    @Query("DELETE FROM ${MovieEntity.TABLE_NAME} WHERE imdbID = :imdbId")
+    fun deleteMovie(imdbId: String)
 }
