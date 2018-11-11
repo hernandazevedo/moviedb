@@ -3,6 +3,9 @@
 # moviedb
 An app to make it easier to save information of your loved movies
 
+<img src="https://raw.githubusercontent.com/hernandazevedo/moviedb/master/filter-screen.jpg" alt="" data-canonical-src="https://github.com/hernandazevedo/moviedb/blob/master/filter-screen.jpg" width="250" height="400" />
+
+<img src="https://github.com/hernandazevedo/moviedb/blob/master/list-screen.jpg" alt="" data-canonical-src="https://github.com/hernandazevedo/moviedb/blob/master/list-screen.jpg" width="250" height="400" />
 
 ## Getting started
 Before you try to run this project you should go to [OMDB API KEY](http://www.omdbapi.com/apikey.aspx) to generate you own key.
@@ -42,7 +45,7 @@ A brief description:
   
   ### Do I like tests?
   
-  Yes, thats why that architecture was chosen in the first place. But give the time I had to make the whole project, I´ve made one test for each layer(junit).
+  Yes, thats why that architecture was chosen in the first place. But given the time I had to make the whole project, I´ve made one test for each layer(junit).
   
   ### And Instrumentation tests?
   Because every implementation is made using interfaces, its easy to create the inversion of control using dagger.
