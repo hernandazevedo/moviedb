@@ -1,13 +1,13 @@
 package com.hernandazevedo.moviedb.data.api.interfaces
 
-import br.com.stone.pos.android.service.container.domain.exceptions.NetworkHostException
-import br.com.stone.pos.android.service.container.domain.exceptions.NetworkTimeoutException
 import com.hernandazevedo.moviedb.data.mapper.MovieJsonMapper
 import com.hernandazevedo.moviedb.data.api.remote.RemoteMovieDetail
 import com.hernandazevedo.moviedb.data.api.remote.RemoteMovieSearch
 import com.hernandazevedo.moviedb.data.api.rest.ApiContract
 import com.hernandazevedo.moviedb.data.util.RemoteNativeUtils
-import com.hernandazevedo.moviedb.exeptions.NetworkResponseException
+import com.hernandazevedo.moviedb.domain.exceptions.NetworkHostException
+import com.hernandazevedo.moviedb.domain.exceptions.NetworkResponseException
+import com.hernandazevedo.moviedb.domain.exceptions.NetworkTimeoutException
 import io.reactivex.Observable
 import io.reactivex.Single
 import retrofit2.Response
