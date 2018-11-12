@@ -33,6 +33,15 @@ A brief description:
  view.
  * data: Implementations of services and repositories.
   
+  ### Continuous Integration
+  * CI bitrise https://app.bitrise.io/app/b28cd307efbcea81#/builds 
+  
+  Ci check is configured as mandatory for all pull requests.
+  
+  ### Code Style Check
+
+--------------------------
+`./gradlew check` runs checkstyle for the code to ensure that the code style guidelines are being used.
   
   ## Decisions
   
@@ -50,3 +59,13 @@ A brief description:
   ### And Instrumentation tests?
   Because every implementation is made using interfaces, its easy to create the inversion of control using dagger.
   I had enough time to implement it using kakao library and by creating a custom implementation of AndroidJUnitRunner that serves a mocked implementation of dagger. There is a test for the search movie by title. check it out!
+
+### Junit + instrumentation tests code coverage merged
+
+--------------------------
+`./gradlew jacocoRootReport` runs unit tests with jacoco and creates a merged coverage report for junit and instrumentation tests. (Please make sure you have a phone or emulator attached before running this command)
+
+<img src="https://github.com/hernandazevedo/moviedb/blob/master/coverage.JPG" alt="" data-canonical-src="https://github.com/hernandazevedo/moviedb/blob/master/coverage.JPG" width="800" height="400" />
+
+License
+This project is licensed under the MIT License - see the LICENSE file for details
