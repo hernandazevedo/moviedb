@@ -26,7 +26,7 @@ android {
         versionCode application.versionCode
         versionName application.versionName
         //TODO Create custom runner for inversion of contrl on tests
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.hernandazevedo.moviedb.runner.ApplicationTestRunner"
     }
 
     sourceSets {
