@@ -49,4 +49,4 @@ A brief description:
   
   ### And Instrumentation tests?
   Because every implementation is made using interfaces, its easy to create the inversion of control using dagger.
-  I hope I have time enough to implement by creating a custom implementation of AndroidJUnitRunner that serves a mocked implementation of dagger.
+  I had enough time to implement it using kakao library and by creating a custom implementation of AndroidJUnitRunner that serves a mocked implementation of dagger. There is a test for the search movie by title. check it out!
