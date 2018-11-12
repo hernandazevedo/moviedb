@@ -19,7 +19,7 @@ Check the plugin here: [gradle-secretkey-plugin](https://github.com/hernandazeve
 
 ## Code Walkthrough
 
-The code is organized using a Clean Architecture with MVVM architecture for the presentatio layer. The implementation was heavily based
+The code is organized using a Clean Architecture with MVVM architecture for the presentation layer. The implementation was heavily based
 on the articles and projects of Fernando Cejas:
  * Article: https://fernandocejas.com/2014/09/03/architecting-android-the-clean-way/
  * Project: https://github.com/android10/Android-CleanArchitecture
@@ -63,7 +63,7 @@ A brief description:
 ### Junit + instrumentation tests code coverage merged
 
 --------------------------
-`./gradlew jacocoRootReport` runs unit tests with jacoco and creates a merged coverage report for junit and instrumentation tests. (Please make sure you have a phone or emulator attached before running this command)
+`./gradlew jacocoRootReport` runs unit tests with jacoco and creates a merged coverage report on your rootProject build dir for junit and instrumentation tests. (Please make sure you have a phone or emulator attached before running this command)
 
 <img src="https://github.com/hernandazevedo/moviedb/blob/master/coverage.JPG" alt="" data-canonical-src="https://github.com/hernandazevedo/moviedb/blob/master/coverage.JPG" width="800" height="400" />
 
