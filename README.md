@@ -1,4 +1,5 @@
 [![Build Status](https://app.bitrise.io/app/b28cd307efbcea81/status.svg?token=ZxfGqim_mTN5EkfBgEGM-A&branch=master)](https://app.bitrise.io/app/b28cd307efbcea81)
+[![codecov.io](https://codecov.io/gh/hernandazevedo/moviedb/branch/master/graph/badge.svg)](https://codecov.io/gh/hernandazevedo/moviedb)
 
 # moviedb
 An app to make it easier to save information of your loved movies
@@ -47,7 +48,7 @@ A brief description:
   
   ### Why MVVM?
   
-  As alternative to MVP, MVVM takes advantage of the reactive programming to leverage the coupling between the presentation
+  As alternative to MVP, MVVM takes advantage of the reactive programming to decrease the coupling between the presentation
   and the business layer. In that case the same viewModel could be used in many screens.
   Check this presentation I´ve made about it some time ago:
   [MVVM - Presentation](https://docs.google.com/presentation/d/1NspsJ7r8qn7x7RMFNGNiFSrDhX2qBV59w5fAAUxi_Fs/edit?usp=sharing)

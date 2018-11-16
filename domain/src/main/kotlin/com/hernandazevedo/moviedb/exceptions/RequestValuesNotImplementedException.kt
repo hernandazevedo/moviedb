@@ -1,4 +1,4 @@
-package com.hernandazevedo.moviedb.exeptions
+package com.hernandazevedo.moviedb.domain.exceptions
 
 class RequestValuesNotImplementedException : RuntimeException() {
 

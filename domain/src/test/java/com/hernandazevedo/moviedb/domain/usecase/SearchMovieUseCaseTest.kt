@@ -1,9 +1,9 @@
 package com.hernandazevedo.moviedb.domain.usecase
 
 import com.hernandazevedo.moviedb.Movie
+import com.hernandazevedo.moviedb.domain.exceptions.RequestValuesNotImplementedException
 import com.hernandazevedo.moviedb.domain.repository.MovieRepository
 import com.hernandazevedo.moviedb.domain.usecase.request.SearchMovieRequest
-import com.hernandazevedo.moviedb.exeptions.RequestValuesNotImplementedException
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.given
 import com.nhaarman.mockito_kotlin.mock
