@@ -19,6 +19,7 @@ class MainActivityTest {
     fun shouldBeShownFilterScreenWhenClickOnActionFilter() {
         screen {
             actionFilter {
+                isDisplayed()
                 click()
             }
             searchMovieButton {
@@ -31,6 +32,7 @@ class MainActivityTest {
     fun shouldSearchMovies() {
         screen {
             actionFilter {
+                isDisplayed()
                 click()
             }
             searchMovieButton {
