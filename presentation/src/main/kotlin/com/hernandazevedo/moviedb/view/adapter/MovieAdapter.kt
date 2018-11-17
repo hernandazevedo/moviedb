@@ -3,6 +3,7 @@ package com.hernandazevedo.moviedb.view.adapter
 import android.app.Activity
 import android.content.Context
 import android.support.v4.app.ActivityOptionsCompat
+import android.support.v4.content.ContextCompat
 import android.support.v4.util.Pair
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -65,9 +66,9 @@ class MovieAdapter(private var movies: MutableList<Movie>? = null,
 
             //even odd
             if (layoutPosition % 2 == 1) {
-                favoriteContainer.setBackgroundColor(context.getColor(R.color.black))
+                favoriteContainer.setBackgroundColor(ContextCompat.getColor(context, R.color.black))
             } else {
-                favoriteContainer.setBackgroundColor(context.getColor(R.color.yellow))
+                favoriteContainer.setBackgroundColor(ContextCompat.getColor(context, R.color.yellow))
             }
 
             itemView.setOnClickListener {

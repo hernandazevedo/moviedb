@@ -7,7 +7,7 @@ ext {
 
     versions = [
             buildTools: "28.0.3",
-            minSdk    : 23,
+            minSdk    : 21,
             targetSdk : 28,
             compileSdk: 28,
     ]
