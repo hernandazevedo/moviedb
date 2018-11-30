@@ -27,6 +27,7 @@ android {
         versionName application.versionName
         //TODO Create custom runner for inversion of contrl on tests
         testInstrumentationRunner "com.hernandazevedo.moviedb.runner.ApplicationTestRunner"
+        setProperty("archivesBaseName", applicationId + "-v" + versionCode + "-" + versionName)
     }
 
     sourceSets {
