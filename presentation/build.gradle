@@ -24,7 +24,7 @@ android {
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
         versionCode application.versionCode
-        versionName application.versionName
+        versionName "$application.versionName"
         //TODO Create custom runner for inversion of contrl on tests
         testInstrumentationRunner "com.hernandazevedo.moviedb.runner.ApplicationTestRunner"
         setProperty("archivesBaseName", applicationId + "-v" + versionName + "-" + versionCode)
