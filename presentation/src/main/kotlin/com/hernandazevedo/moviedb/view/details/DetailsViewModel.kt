@@ -10,7 +10,7 @@ import com.hernandazevedo.moviedb.domain.usecase.request.GetMovieDetailsRequest
 import com.hernandazevedo.moviedb.domain.usecase.request.SaveMovieToLocalDatabaseRequest
 import com.hernandazevedo.moviedb.util.UseCaseHandler
 import com.hernandazevedo.moviedb.view.base.BaseViewModel
-import com.hernandazevedo.moviedb.view.base.Resource
+import com.hernandazevedo.moviedb.view.base.Either
 
 class DetailsViewModel(
     val getMovieDetailsUseCase: BaseUseCase<GetMovieDetailsRequest, MovieDetail>,
@@ -18,8 +18,8 @@ class DetailsViewModel(
     val deleteMovieFromLocalDatabaseUseCase: BaseUseCase<DeleteMovieFromLocalDatabaseRequest, Long>
 ) : BaseViewModel() {
 
-    val responseGetMovieDetails: MutableLiveData<Resource<MovieDetail>> = MutableLiveData()
-    val rsponseFavoriteAction: MutableLiveData<Resource<Any>> = MutableLiveData()
+    val responseGetMovieDetails: MutableLiveData<Either<Throwable, MovieDetail>> = MutableLiveData()
+    val rsponseFavoriteAction: MutableLiveData<Either<Throwable, Nothing>> = MutableLiveData()
 
     fun getMovieDetails(imdbID: String) {
         Logger.d("Starting getMovieDetails - $imdbID")
@@ -29,10 +29,10 @@ class DetailsViewModel(
             useCaseExecute
                 .subscribe({
                     Logger.d("Success searching movies for imdbID $imdbID")
-                    responseGetMovieDetails.value = Resource.success(it)
+                    responseGetMovieDetails.value = Either.Value(it)
                 }, {
                     Logger.d("Error searching movies for imdbID $imdbID")
-                    responseGetMovieDetails.value = Resource.error(it)
+                    responseGetMovieDetails.value = Either.Error(it)
                 }))
     }
 
@@ -51,10 +51,10 @@ class DetailsViewModel(
             useCaseExecute
                 .subscribe({
                     Logger.d("Success favoriteAction $checked")
-                    responseGetMovieDetails.value = Resource.success()
+                    rsponseFavoriteAction.value = Either.Completed
                 }, {
                     Logger.d("Error favoriteAction $checked")
-                    responseGetMovieDetails.value = Resource.error(it)
+                    rsponseFavoriteAction.value = Either.Error(it)
                 }))
     }
 }

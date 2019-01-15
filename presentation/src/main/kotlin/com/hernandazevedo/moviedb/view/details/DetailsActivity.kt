@@ -13,8 +13,7 @@ import com.hernandazevedo.moviedb.R
 import com.hernandazevedo.moviedb.data.Logger
 import com.hernandazevedo.moviedb.getFactoryViewModel
 import com.hernandazevedo.moviedb.view.base.BaseActivity
-import com.hernandazevedo.moviedb.view.base.Resource
-import com.hernandazevedo.moviedb.view.base.Status
+import com.hernandazevedo.moviedb.view.base.Either
 import kotlinx.android.synthetic.main.activity_details.*
 import javax.inject.Inject
 
@@ -43,7 +42,7 @@ class DetailsActivity : BaseActivity() {
 
     private fun subscribeToSearchMovie() {
         detailsViewModel.responseGetMovieDetails.observe(this,
-            Observer<Resource<MovieDetail>> {
+            Observer<Either<Throwable, MovieDetail>> {
                 when (it?.status) {
                     Status.SUCCESS -> {
                         Logger.d("Success finding movie details")

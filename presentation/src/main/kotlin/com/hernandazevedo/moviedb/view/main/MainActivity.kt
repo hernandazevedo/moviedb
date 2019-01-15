@@ -16,8 +16,8 @@ import com.hernandazevedo.moviedb.getFactoryViewModel
 import com.hernandazevedo.moviedb.view.Navigator
 import com.hernandazevedo.moviedb.view.adapter.MovieAdapter
 import com.hernandazevedo.moviedb.view.base.BaseActivity
-import com.hernandazevedo.moviedb.view.base.Resource
-import com.hernandazevedo.moviedb.view.base.Status
+import com.hernandazevedo.moviedb.view.base.Either
+import com.hernandazevedo.moviedb.view.base.fold
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_movies.*
 import javax.inject.Inject
@@ -73,24 +73,19 @@ class MainActivity : BaseActivity() , NavigationView.OnNavigationItemSelectedLis
     }
 
     private fun subscribeToSearchMovie() {
-        mainViewModel.responseSearchMovie.observe(this,
-            Observer<Resource<List<Movie>>> {
-                when (it?.status) {
-                    Status.SUCCESS -> {
-                        Logger.d("Success finding movie")
-                        showMovies(it.data)
-                    }
-                    Status.ERROR -> {
-                        Logger.d("Error finding movie")
-                        showMessage("Error finding movie")
-                        it.throwable?.printStackTrace()
-                    }
-                }
-            })
+        mainViewModel.responseSearchMovie.observe(this, Observer {
+            it?.fold(this::handleError, this::showMovies)
+        })
     }
 
-    private fun showMovies(movieList: List<Movie>?) {
+    private fun showMovies(movieList: List<Movie>) {
+        Logger.d("Success finding movie")
         movieAdapter.setMovies(movieList)
+    }
+
+    private fun handleError(e: Throwable) {
+        Logger.e("Error finding movie", e)
+        showMessage("Error finding movie")
     }
 
     private fun setupRecyclersView() {
