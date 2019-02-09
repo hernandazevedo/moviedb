@@ -18,8 +18,8 @@ object Logger {
         Timber.tag(UNIQUE_TAG).e(e)
     }
 
-    fun e(msg: String, e: Throwable) {
-        Timber.tag(UNIQUE_TAG).e(msg, e)
+    fun e( e: Throwable, msg: String) {
+        Timber.tag(UNIQUE_TAG).e(e, msg)
     }
 
     fun init() {

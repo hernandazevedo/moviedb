@@ -13,7 +13,7 @@ import com.hernandazevedo.moviedb.R
 import com.hernandazevedo.moviedb.data.Logger
 import com.hernandazevedo.moviedb.getFactoryViewModel
 import com.hernandazevedo.moviedb.view.base.BaseActivity
-import com.hernandazevedo.moviedb.view.base.Either
+import com.hernandazevedo.moviedb.view.base.fold
 import kotlinx.android.synthetic.main.activity_details.*
 import javax.inject.Inject
 
@@ -34,6 +34,7 @@ class DetailsActivity : BaseActivity() {
         detailsViewModel = getFactoryViewModel { detailsViewModel }
         setContentView(R.layout.activity_details)
         subscribeToSearchMovie()
+        subscribeToFavoriteMovie()
         shareAction.setOnClickListener { setupShareAction() }
         populateInfo()
         setupFavAction()
@@ -42,18 +43,24 @@ class DetailsActivity : BaseActivity() {
 
     private fun subscribeToSearchMovie() {
         detailsViewModel.responseGetMovieDetails.observe(this,
-            Observer<Either<Throwable, MovieDetail>> {
-                when (it?.status) {
-                    Status.SUCCESS -> {
-                        Logger.d("Success finding movie details")
-                        fillMovieDetail(it.data)
-                    }
-                    Status.ERROR -> {
-                        Logger.d("Error finding movie details")
-                        showMessage("Error finding movie details")
-                        it.throwable?.printStackTrace()
-                    }
-                }
+            Observer {
+                it?.fold({ e: Throwable ->
+                    Logger.e(e, "Left finding movie details")
+                    showMessage("Left finding movie details")
+                }, {})
+            })
+    }
+
+    private fun subscribeToFavoriteMovie() {
+        detailsViewModel.responseFavoriteAction.observe(this,
+            Observer {
+                it?.fold(
+                    { e: Throwable ->
+                        Logger.e(e, "Left finding movie details")
+                        showMessage("Left finding movie details")
+                    },
+                    {}
+                )
             })
     }
 
@@ -80,7 +87,7 @@ class DetailsActivity : BaseActivity() {
             movieTitle.text = "# ${movie.title}"
             movieYear.text = year
             movieVoteAverage.text = "'-'"
-            favoriteButton.isChecked = favored ?: false
+            favoriteButton.isChecked = favored
 
             movieAdultImage.setImageDrawable(getDrawable(R.drawable.ic_clapperboard))
             //TODO

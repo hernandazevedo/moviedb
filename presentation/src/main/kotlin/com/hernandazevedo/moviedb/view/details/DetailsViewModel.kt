@@ -19,7 +19,7 @@ class DetailsViewModel(
 ) : BaseViewModel() {
 
     val responseGetMovieDetails: MutableLiveData<Either<Throwable, MovieDetail>> = MutableLiveData()
-    val rsponseFavoriteAction: MutableLiveData<Either<Throwable, Nothing>> = MutableLiveData()
+    val responseFavoriteAction: MutableLiveData<Either<Throwable, Any>> = MutableLiveData()
 
     fun getMovieDetails(imdbID: String) {
         Logger.d("Starting getMovieDetails - $imdbID")
@@ -29,10 +29,10 @@ class DetailsViewModel(
             useCaseExecute
                 .subscribe({
                     Logger.d("Success searching movies for imdbID $imdbID")
-                    responseGetMovieDetails.value = Either.Value(it)
+                    responseGetMovieDetails.value = Either.Right(it)
                 }, {
-                    Logger.d("Error searching movies for imdbID $imdbID")
-                    responseGetMovieDetails.value = Either.Error(it)
+                    Logger.d("Left searching movies for imdbID $imdbID")
+                    responseGetMovieDetails.value = Either.Left(it)
                 }))
     }
 
@@ -51,10 +51,10 @@ class DetailsViewModel(
             useCaseExecute
                 .subscribe({
                     Logger.d("Success favoriteAction $checked")
-                    rsponseFavoriteAction.value = Either.Completed
+                    responseFavoriteAction.value = Either.Right(Any())
                 }, {
-                    Logger.d("Error favoriteAction $checked")
-                    rsponseFavoriteAction.value = Either.Error(it)
+                    Logger.d("Left favoriteAction $checked")
+                    responseFavoriteAction.value = Either.Left(it)
                 }))
     }
 }

@@ -23,10 +23,10 @@ open class MainViewModel(val searchMovieUseCase: BaseUseCase<SearchMovieRequest,
             useCaseExecute
                 .subscribe({
                     Logger.d("Success searching movies for title $title")
-                    responseSearchMovie.value = Either.Value(it)
+                    responseSearchMovie.value = Either.Right(it)
                 }, {
-                    Logger.d("Error searching movies for title $title")
-                    responseSearchMovie.value = Either.Error(it)
+                    Logger.d("Left searching movies for title $title")
+                    responseSearchMovie.value = Either.Left(it)
                 }))
     }
 
@@ -38,10 +38,10 @@ open class MainViewModel(val searchMovieUseCase: BaseUseCase<SearchMovieRequest,
             useCaseExecute
                 .subscribe({
                     Logger.d("Success searching favorited movies")
-                    responseSearchMovie.value = Either.Value(it)
+                    responseSearchMovie.value = Either.Right(it)
                 }, {
-                    Logger.d("Error searching favorited movies")
-                    responseSearchMovie.value = Either.Error(it)
+                    Logger.d("Left searching favorited movies")
+                    responseSearchMovie.value = Either.Left(it)
                 }))
     }
 }

@@ -56,7 +56,7 @@ class MainViewModelTest {
     @Test
     fun shouldSearchMovieTest() {
         val expectedResult: MutableLiveData<Either<Throwable, List<Movie>>> = MutableLiveData()
-        expectedResult.value = Either.Value(fakeMovieList)
+        expectedResult.value = Either.Right(fakeMovieList)
         mainViewModel.searchMovie(fakeTitleSearch)
         Assert.assertEquals(expectedResult.value, mainViewModel.responseSearchMovie.value)
     }

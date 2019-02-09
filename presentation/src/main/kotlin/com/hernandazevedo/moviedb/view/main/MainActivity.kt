@@ -16,7 +16,6 @@ import com.hernandazevedo.moviedb.getFactoryViewModel
 import com.hernandazevedo.moviedb.view.Navigator
 import com.hernandazevedo.moviedb.view.adapter.MovieAdapter
 import com.hernandazevedo.moviedb.view.base.BaseActivity
-import com.hernandazevedo.moviedb.view.base.Either
 import com.hernandazevedo.moviedb.view.base.fold
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_movies.*
@@ -84,8 +83,8 @@ class MainActivity : BaseActivity() , NavigationView.OnNavigationItemSelectedLis
     }
 
     private fun handleError(e: Throwable) {
-        Logger.e("Error finding movie", e)
-        showMessage("Error finding movie")
+        Logger.e(e, "Left finding movie")
+        showMessage("Left finding movie")
     }
 
     private fun setupRecyclersView() {
