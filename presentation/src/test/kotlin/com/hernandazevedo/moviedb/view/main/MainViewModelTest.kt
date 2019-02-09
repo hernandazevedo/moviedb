@@ -7,7 +7,7 @@ import com.hernandazevedo.moviedb.domain.usecase.base.BaseRequestValues
 import com.hernandazevedo.moviedb.domain.usecase.base.BaseUseCase
 import com.hernandazevedo.moviedb.domain.usecase.request.SearchMovieRequest
 import com.hernandazevedo.moviedb.rx.RxImmediateSchedulerRule
-import com.hernandazevedo.moviedb.view.base.Resource
+import com.hernandazevedo.moviedb.view.base.Either
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.given
 import com.nhaarman.mockito_kotlin.mock
@@ -55,8 +55,8 @@ class MainViewModelTest {
 
     @Test
     fun shouldSearchMovieTest() {
-        val expectedResult: MutableLiveData<com.hernandazevedo.moviedb.view.base.Resource<List<Movie>>> = MutableLiveData()
-        expectedResult.value = Resource.success(fakeMovieList)
+        val expectedResult: MutableLiveData<Either<Throwable, List<Movie>>> = MutableLiveData()
+        expectedResult.value = Either.Right(fakeMovieList)
         mainViewModel.searchMovie(fakeTitleSearch)
         Assert.assertEquals(expectedResult.value, mainViewModel.responseSearchMovie.value)
     }

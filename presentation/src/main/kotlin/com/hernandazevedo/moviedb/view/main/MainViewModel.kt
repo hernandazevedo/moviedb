@@ -8,12 +8,12 @@ import com.hernandazevedo.moviedb.domain.usecase.base.BaseUseCase
 import com.hernandazevedo.moviedb.domain.usecase.request.SearchMovieRequest
 import com.hernandazevedo.moviedb.util.UseCaseHandler
 import com.hernandazevedo.moviedb.view.base.BaseViewModel
-import com.hernandazevedo.moviedb.view.base.Resource
+import com.hernandazevedo.moviedb.view.base.Either
 
 open class MainViewModel(val searchMovieUseCase: BaseUseCase<SearchMovieRequest, List<Movie>>,
                          val fetchMyFavoritesUseCase: BaseUseCase<BaseRequestValues, List<Movie>>) : BaseViewModel() {
     //Here could be an object created on presentation layer, but to be simple we are using the domain model.
-    val responseSearchMovie: MutableLiveData<Resource<List<Movie>>> = MutableLiveData()
+    val responseSearchMovie: MutableLiveData<Either<Throwable, List<Movie>>> = MutableLiveData()
 
     fun searchMovie(title: String) {
         Logger.d("Starting searchMovie - $title")
@@ -23,10 +23,10 @@ open class MainViewModel(val searchMovieUseCase: BaseUseCase<SearchMovieRequest,
             useCaseExecute
                 .subscribe({
                     Logger.d("Success searching movies for title $title")
-                    responseSearchMovie.value = Resource.success(it)
+                    responseSearchMovie.value = Either.Right(it)
                 }, {
-                    Logger.d("Error searching movies for title $title")
-                    responseSearchMovie.value = Resource.error(it)
+                    Logger.d("Left searching movies for title $title")
+                    responseSearchMovie.value = Either.Left(it)
                 }))
     }
 
@@ -38,10 +38,10 @@ open class MainViewModel(val searchMovieUseCase: BaseUseCase<SearchMovieRequest,
             useCaseExecute
                 .subscribe({
                     Logger.d("Success searching favorited movies")
-                    responseSearchMovie.value = Resource.success(it)
+                    responseSearchMovie.value = Either.Right(it)
                 }, {
-                    Logger.d("Error searching favorited movies")
-                    responseSearchMovie.value = Resource.error(it)
+                    Logger.d("Left searching favorited movies")
+                    responseSearchMovie.value = Either.Left(it)
                 }))
     }
 }

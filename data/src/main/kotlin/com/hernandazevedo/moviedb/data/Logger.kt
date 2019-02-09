@@ -18,6 +18,10 @@ object Logger {
         Timber.tag(UNIQUE_TAG).e(e)
     }
 
+    fun e( e: Throwable, msg: String) {
+        Timber.tag(UNIQUE_TAG).e(e, msg)
+    }
+
     fun init() {
         if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
     }
