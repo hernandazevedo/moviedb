@@ -2,7 +2,7 @@
 [![codecov.io](https://codecov.io/gh/hernandazevedo/moviedb/branch/master/graph/badge.svg)](https://codecov.io/gh/hernandazevedo/moviedb)
 
 # moviedb
-An app to make it easier to save information of your loved movies
+An app to make it easier to save information of your loved movie.
 
 <img src="https://raw.githubusercontent.com/hernandazevedo/moviedb/master/filter-screen.jpg" alt="" data-canonical-src="https://github.com/hernandazevedo/moviedb/blob/master/filter-screen.jpg" width="250" height="400" />
 
