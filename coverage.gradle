@@ -13,12 +13,13 @@ task jacocoTestReport(type: JacocoReport, overwrite: true) {
     def dependencyTasks
 //    if (project.plugins.hasPlugin('com.android.application')) {
 //        dependencyTasks = ['testDebugUnitTest', 'createDebugCoverageReport']
-//    } else if (project.plugins.hasPlugin("com.android.library")) {
+//    } else
+    if (project.plugins.hasPlugin("com.android.library") || project.plugins.hasPlugin('com.android.application')) {
         dependencyTasks = ['testDebugUnitTest']
-//    } else {
-//        debugTree = fileTree(dir: "$project.buildDir/classes/kotlin/main", excludes: fileFilter)
-//        dependencyTasks = ['test']
-//    }
+    } else {
+        debugTree = fileTree(dir: "$project.buildDir/classes/kotlin/main", excludes: fileFilter)
+        dependencyTasks = ['test']
+    }
 
     dependsOn {
         dependencyTasks
