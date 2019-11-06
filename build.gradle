@@ -2,7 +2,7 @@
 
 buildscript {
     apply from: 'dependencies.gradle'
-    apply from: "mergedCoverage.gradle"
+//    apply from: "mergedCoverage.gradle"
     repositories {
         google()
         jcenter()

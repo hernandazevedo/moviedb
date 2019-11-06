@@ -11,14 +11,14 @@ task jacocoTestReport(type: JacocoReport, overwrite: true) {
     def debugTree = fileTree(dir: "$project.buildDir/tmp/kotlin-classes/debug", excludes: fileFilter)
 
     def dependencyTasks
-    if (project.plugins.hasPlugin('com.android.application')) {
-        dependencyTasks = ['testDebugUnitTest', 'createDebugCoverageReport']
-    } else if (project.plugins.hasPlugin("com.android.library")) {
+//    if (project.plugins.hasPlugin('com.android.application')) {
+//        dependencyTasks = ['testDebugUnitTest', 'createDebugCoverageReport']
+//    } else if (project.plugins.hasPlugin("com.android.library")) {
         dependencyTasks = ['testDebugUnitTest']
-    } else {
-        debugTree = fileTree(dir: "$project.buildDir/classes/kotlin/main", excludes: fileFilter)
-        dependencyTasks = ['test']
-    }
+//    } else {
+//        debugTree = fileTree(dir: "$project.buildDir/classes/kotlin/main", excludes: fileFilter)
+//        dependencyTasks = ['test']
+//    }
 
     dependsOn {
         dependencyTasks
@@ -33,12 +33,12 @@ task jacocoTestReport(type: JacocoReport, overwrite: true) {
     classDirectories = files([debugTree])
 
     executionData = fileTree(dir: project.buildDir, includes: [
-            'jacoco/testDebugUnitTest.exec', 'outputs/code-coverage/connected/*coverage.ec', 'jacoco/test.exec'
+            'jacoco/testDebugUnitTest.exec', 'outputs/code-coverage/connected/*coverage.ec', 'jacoco/test.exec', '/sdcard/tempDir/coverage.ec'
     ])
 
 }
 
 
-rootProject.tasks.jacocoRootReport.dependsOn tasks.jacocoTestReport
+//rootProject.tasks.jacocoRootReport.dependsOn tasks.jacocoTestReport
 
-rootProject.tasks.jacocoMerge.mustRunAfter tasks.jacocoTestReport
+//rootProject.tasks.jacocoMerge.mustRunAfter tasks.jacocoTestReport
