@@ -35,9 +35,11 @@ task jacocoTestReport(type: JacocoReport, overwrite: true) {
     sourceDirectories = files([mainSrc])
     classDirectories = files([debugTree])
 
-    executionData = fileTree(dir: project.buildDir, includes: [
-            'jacoco/testDebugUnitTest.exec', "/Users/hernand/Downloads/coverage.ec"
-    ])
+    executionData = files([fileTree(dir: project.buildDir, includes: [
+            'jacoco/testDebugUnitTest.exec'
+    ])], [fileTree(dir: "${System.env.VDTESTING_DOWNLOADED_FILES_DIR}", includes: [
+            '*sdcard_coverage.ec'
+    ])])
 
 }
 
