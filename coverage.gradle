@@ -1,7 +1,7 @@
 apply plugin: 'jacoco'
 
 jacoco {
-    toolVersion = '0.8.2'
+    toolVersion = '0.8.5'
 }
 
 def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', '**/*$*', 'android/**/*.*', '**/*Function*', '**/*_impl*']
@@ -10,10 +10,13 @@ task jacocoTestReport(type: JacocoReport, overwrite: true) {
     def mainSrc = "$project.projectDir/src/main/kotlin"
     def debugTree = fileTree(dir: "$project.buildDir/tmp/kotlin-classes/debug", excludes: fileFilter)
 
+    print("Test dir ${System.env.VDTESTING_DOWNLOADED_FILES_DIR}")
+    print(file("${System.env.VDTESTING_DOWNLOADED_FILES_DIR}").exists())
     def dependencyTasks
-    if (project.plugins.hasPlugin('com.android.application')) {
-        dependencyTasks = ['testDebugUnitTest', 'createDebugCoverageReport']
-    } else if (project.plugins.hasPlugin("com.android.library")) {
+//    if (project.plugins.hasPlugin('com.android.application')) {
+//        dependencyTasks = ['testDebugUnitTest', 'createDebugCoverageReport']
+//    } else
+    if (project.plugins.hasPlugin("com.android.library") || project.plugins.hasPlugin('com.android.application')) {
         dependencyTasks = ['testDebugUnitTest']
     } else {
         debugTree = fileTree(dir: "$project.buildDir/classes/kotlin/main", excludes: fileFilter)
@@ -32,13 +35,15 @@ task jacocoTestReport(type: JacocoReport, overwrite: true) {
     sourceDirectories = files([mainSrc])
     classDirectories = files([debugTree])
 
-    executionData = fileTree(dir: project.buildDir, includes: [
-            'jacoco/testDebugUnitTest.exec', 'outputs/code-coverage/connected/*coverage.ec', 'jacoco/test.exec'
-    ])
+    executionData = files([fileTree(dir: project.buildDir, includes: [
+            'jacoco/testDebugUnitTest.exec'
+    ])], [fileTree(dir: "${System.env.VDTESTING_DOWNLOADED_FILES_DIR}", includes: [
+            '*sdcard_coverage.ec'
+    ])])
 
 }
 
 
-rootProject.tasks.jacocoRootReport.dependsOn tasks.jacocoTestReport
+//rootProject.tasks.jacocoRootReport.dependsOn tasks.jacocoTestReport
 
-rootProject.tasks.jacocoMerge.mustRunAfter tasks.jacocoTestReport
+//rootProject.tasks.jacocoMerge.mustRunAfter tasks.jacocoTestReport
